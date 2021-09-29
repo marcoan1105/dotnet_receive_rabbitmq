@@ -5,5 +5,6 @@ ENV DOTNET_EnableDiagnostics=0
 ENV RBHOST=rabbitmq
 ENV RBUSER=admin
 ENV RBPASS=123456
+ENV RBQUEUE=guid
 WORKDIR /App
 ENTRYPOINT ["dotnet", "ReceiveRabbitMq.dll"]

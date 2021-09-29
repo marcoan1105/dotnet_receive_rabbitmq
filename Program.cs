@@ -14,16 +14,23 @@ namespace ReceiveRabbitMq
             var RBHOST = Environment.GetEnvironmentVariable("RBHOST");
             var RBUSER = Environment.GetEnvironmentVariable("RBUSER");
             var RBPASS = Environment.GetEnvironmentVariable("RBPASS");
+            var RBQUEUE = Environment.GetEnvironmentVariable("RBQUEUE");
+
+
+            RBHOST = RBHOST != null ? RBHOST : "localhost";
+            RBUSER = RBUSER != null ? RBUSER : "admin";
+            RBPASS = RBPASS != null ? RBPASS : "123456";
+            RBQUEUE = RBQUEUE != null ? RBQUEUE : "guid";
 
             using(var rabbit = new Rabbit(
-                hostname: RBHOST != null ? RBHOST : "localhost",
-                user: RBUSER != null ? RBUSER : "admin",
-                password: RBPASS != null ? RBPASS : "123456"
+                hostname: RBHOST,
+                user: RBUSER,
+                password: RBPASS
             )){
 
-                rabbit.QueueDeclare("guid");    
+                rabbit.QueueDeclare(RBQUEUE);    
                    
-                rabbit.CreateBasicConsumer("guid", ReceivedFunction);
+                rabbit.CreateBasicConsumer(RBQUEUE, ReceivedFunction);
 
                 Console.WriteLine(" Pressione qualquer tecla para finalizar");
                 Console.ReadLine();

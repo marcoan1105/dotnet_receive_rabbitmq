@@ -7,5 +7,5 @@
 
 Para executar:
 
-- dotnet public -c Release
+- dotnet publish -c Release
 - dotnet bin/Release/net5.0/publish/ReceiveRabbitMq.dll
